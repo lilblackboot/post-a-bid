@@ -6,4 +6,3 @@ link to design and ui : https://www.figma.com/design/NL5ORpuWM0NdMq7b98sV7x/post
 
 
 the documantation for the frontend and backend of the website is given in there separate folders
-
