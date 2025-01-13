@@ -5,9 +5,8 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const app = express();
 
-// IMPORTANT: CORS configuration must come BEFORE other middleware
 const corsOptions = {
-    origin: 'http://localhost:5173', // Your Vite frontend URL
+    origin: 'http://localhost:5173', 
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -29,10 +28,7 @@ app.get('/api/test', (req, res) => {
     res.json({ message: 'CORS is working!' });
 });
 
-// Rest of your routes...
-// User Schema and other code remains the same
-
-// User Schema  const handleSubmit = async (e) =>   
+  
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -98,7 +94,6 @@ app.post('/api/signup', validateSignup, async (req, res) => {
         const { name, email, password } = req.body;
         console.log('Received signup request:', { name, email }); // Log the incoming data
 
-        // Check if user already exists
         const existingUser = await User.findOne({ email });
         console.log('Existing user check:', existingUser); // Log if user exists
 
