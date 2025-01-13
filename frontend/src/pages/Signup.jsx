@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
+import Navbar from '../components/Navbar';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -100,12 +101,20 @@ const Signup = () => {
     }
   };
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    
+   <>
+   <Navbar /> 
+    <div className="min-h-screen bg-transparent flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+        
+      </div>
+
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="bg-[#262C35] py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <h2 className="mt-6 text-center bg-transparent text-3xl font-bold tracking-tight text-white">
           Create your account
         </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
+        <p className="mt-2 text-center py-2 text-sm bg-transparent text-gray-500">
           Already have an account?{' '}
           <button
             onClick={() => navigate('/login')}
@@ -114,19 +123,15 @@ const Signup = () => {
             Sign in
           </button>
         </p>
-      </div>
-
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
+          <form className="space-y-6 bg-transparent" onSubmit={handleSubmit}>
+            <div className='bg-transparent'>
               <label 
                 htmlFor="name" 
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm bg-transparent font-medium text-gray-400"
               >
                 Full Name
               </label>
-              <div className="mt-1">
+              <div className="mt-1 bg-transparent">
                 <input
                   id="name"
                   name="name"
@@ -145,10 +150,10 @@ const Signup = () => {
               </div>
             </div>
 
-            <div>
+            <div className='bg-transparent'>
               <label 
                 htmlFor="email" 
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm bg-transparent font-medium text-gray-400"
               >
                 Email address
               </label>
@@ -172,10 +177,10 @@ const Signup = () => {
               </div>
             </div>
 
-            <div>
+            <div className='bg-transparent'>  
               <label 
                 htmlFor="password" 
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm bg-transparent font-medium text-gray-400"
               >
                 Password
               </label>
@@ -209,10 +214,10 @@ const Signup = () => {
               </div>
             </div>
 
-            <div>
+            <div className='bg-transparent'>  
               <label 
                 htmlFor="confirmPassword" 
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm bg-transparent font-medium text-gray-400"
               >
                 Confirm Password
               </label>
@@ -224,7 +229,7 @@ const Signup = () => {
                   required
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className={`block w-full appearance-none rounded-md border px-3 py-2 shadow-sm focus:outline-none sm:text-sm
+                  className={`block w-full appearance-none bg-transparent rounded-md border px-3 py-2 shadow-sm focus:outline-none sm:text-sm
                     ${formErrors.confirmPassword 
                       ? 'border-red-300 focus:border-red-500 focus:ring-red-500' 
                       : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500'}`}
@@ -235,21 +240,21 @@ const Signup = () => {
               </div>
             </div>
 
-            <div className="flex items-center">
+            <div className="flex bg-transparent items-center">
               <input
                 id="terms"
                 name="terms"
                 type="checkbox"
                 required
-                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                className="h-4 w-4 rounded bg-transparent border-gray-300 text-blue-600 focus:ring-blue-500"
               />
-              <label htmlFor="terms" className="ml-2 block text-sm text-gray-900">
+              <label htmlFor="terms" className="ml-2 bg-transparent block text-sm text-gray-600">
                 I agree to the{' '}
-                <a href="#" className="text-blue-600 hover:text-blue-500">
+                <a href="#" className="text-blue-600 bg-transparent hover:text-blue-500">
                   Terms of Service
                 </a>{' '}
                 and{' '}
-                <a href="#" className="text-blue-600 hover:text-blue-500">
+                <a href="#" className="text-blue-600 bg-transparent hover:text-blue-500">
                   Privacy Policy
                 </a>
               </label>
@@ -265,13 +270,13 @@ const Signup = () => {
             </div>
           </form>
 
-          <div className="mt-6">
+          <div className="mt-6 bg-transparent">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300" />
               </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="bg-white px-2 text-gray-500">
+              <div className="relative  flex justify-center text-sm">
+                <span className="bg-transparent px-2 text-gray-500">
                   Or continue with
                 </span>
               </div>
@@ -288,13 +293,14 @@ const Signup = () => {
                 type="button"
                 className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
               >
-                GitHub
+                Facebook
               </button>
             </div>
           </div>
         </div>
       </div>
     </div>
+   </>
   );
 };
 
