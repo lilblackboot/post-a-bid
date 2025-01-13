@@ -54,18 +54,51 @@ const Signup = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = validateForm();
     
     if (Object.keys(errors).length === 0) {
-      // Form is valid - will add API call later
-      console.log('Form submitted:', formData);
+      try {
+        const response = await fetch('http://localhost:5000/api/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          // Remove credentials since we don't need them for this request
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            password: formData.password,
+            confirmPassword: formData.confirmPassword
+          }),
+        });
+  
+        const data = await response.json();
+  
+        if (!response.ok) {
+          if (data.errors) {
+            setFormErrors(data.errors);
+          } else {
+            setFormErrors({ general: 'Signup failed. Please try again.' });
+          }
+          return;
+        }
+  
+        // Signup successful
+        console.log('Signup successful:', data);
+        navigate('/login');
+  
+      } catch (error) {
+        console.error('Signup error:', error);
+        setFormErrors({ 
+          general: 'Network error. Please try again.' 
+        });
+      }
     } else {
       setFormErrors(errors);
     }
   };
-
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
