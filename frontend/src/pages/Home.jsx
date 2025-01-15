@@ -1,13 +1,14 @@
 import Navbar from '../components/Navbar';
 import SearchBar from '../components/SearchBar';
-import ProductCard from '../components/ProductCard';
-
+import PostGrid from '../components/PostGrid';
 function Home() {
   return (
     <div>
       <Navbar />
       <SearchBar />
-      <ProductCard />
+      <div>
+        <PostGrid /> 
+      </div>
     </div>
   );
 }
