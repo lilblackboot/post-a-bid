@@ -4,7 +4,7 @@ const posts = [
   { id: 1,  user: {
       name: 'Jane Smith',
       profilePicture: 'https://media.istockphoto.com/id/1437816897/photo/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring.jpg?s=612x612&w=0&k=20&c=tyLvtzutRh22j9GqSGI33Z4HpIwv9vL_MZw_xOE19NQ=',
-    }, image: 'https://media.istockphoto.com/id/175499936/photo/isolated-shot-of-wooden-table-on-white-background.jpg?s=612x612&w=0&k=20&c=ehujtyZnSnXVxlpzfuLwHHqMJgPJzfpLtzcmrjHsecA=', title: 'Antique Table' ,disc : 'this is a antique table',timeleft : '2 hours',currentbid : '25,000'},
+    }, image: 'https://media.istockphoto.com/id/175499936/photo/isolated-shot-of-wooden-table-on-white-background.jpg?s=612x612&w=0&k=20&c=ehujtyZnSnXVxlpzfuLwHHqMJgPJzfpLtzcmrjHsecA=', title: 'Antique Table' ,disc : 'this is a antique table',timeleft : '2 hours left',currentbid : '25,000'},
   { id: 2,  user: {
       name: 'Jane Smith',
       profilePicture: 'https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg',
@@ -20,7 +20,7 @@ const PostGrid = () => {
   return (
     <div className="columns-1 sm:columns-3 lg:columns-6 gap-4 p-4">
       {posts.map(post => (
-        <div key={post.id} className="mb-4 bg-[#D9D9D9] rounded-xl p-5 break-inside-avoid">
+        <div key={post.id} className="mb-4 bg-gray-200 rounded-xl p-5 break-inside-avoid">
           <img
             src={post.image}
             alt={post.title}
