@@ -61,34 +61,35 @@ const Signup = () => {
     
     if (Object.keys(errors).length === 0) {
       try {
+        // Log the data being sent
+        console.log('Sending data:', {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password
+        });
+  
         const response = await fetch('http://localhost:5000/api/signup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            // Remove any other headers
           },
-          // Remove credentials since we don't need them for this request
           body: JSON.stringify({
             name: formData.name,
             email: formData.email,
-            password: formData.password,
-            confirmPassword: formData.confirmPassword
-          }),
+            password: formData.password
+          })
         });
   
         const data = await response.json();
+        console.log('Response:', data);
   
-        if (!response.ok) {
-          if (data.errors) {
-            setFormErrors(data.errors);
-          } else {
-            setFormErrors({ general: 'Signup failed. Please try again.' });
-          }
-          return;
+        if (response.ok) {
+          console.log('Signup successful');
+          navigate('/login');
+        } else {
+          setFormErrors({ general: data.message || 'Signup failed' });
         }
-  
-        // Signup successful
-        console.log('Signup successful:', data);
-        navigate('/login');
   
       } catch (error) {
         console.error('Signup error:', error);
