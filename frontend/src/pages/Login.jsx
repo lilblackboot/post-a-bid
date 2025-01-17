@@ -7,32 +7,47 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Login attempted with:", { email, password });
+    try {
+      const response = await fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Handle successful login (e.g., store user data, navigate to dashboard)
+        console.log('Login successful:', data);
+        navigate('/'); // Redirect to the dashboard or home page
+      } else {
+        // Handle login error
+        setError(data.message || 'Login failed');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setError('Network error. Please try again.');
+    }
   };
 
   return (
     <>
-    <Navbar />
+      <Navbar />
       <div className="min-h-screen bg-[#313843] flex flex-col justify-center py-8 sm:px-6 lg:px-8">
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-[#262C35] py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <h2 className="text-center bg-transparent text-3xl font-bold tracking-tight text-white">
               Welcome back
             </h2>
-            <p className="mt-2 text-center bg-transparent text-sm text-gray-500">
-              Don't have an account?{" "}
-              <button
-                onClick={() => navigate("/signup")}
-                className="font-medium text-blue-600 hover:text-blue-500"
-              >
-                Sign up
-              </button>
-            </p>
+            {error && <p className="text-red-500 text-center">{error}</p>}
             <form className="space-y-6 bg-transparent" onSubmit={handleSubmit}>
               <div className="bg-transparent">
                 <label
@@ -89,32 +104,6 @@ const Login = () => {
                 </div>
               </div>
 
-              <div className="flex bg-transparent items-center justify-between">
-                <div className="flex bg-transparent items-center">
-                  <input
-                    id="remember-me"
-                    name="remember-me"
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                  />
-                  <label
-                    htmlFor="remember-me"
-                    className="ml-2 block bg-transparent text-sm text-gray-400"
-                  >
-                    Remember me
-                  </label>
-                </div>
-
-                <div className="bg-transparent text-sm">
-                  <a
-                    href="#"
-                    className="font-medium bg-transparent text-blue-600 hover:text-blue-500"
-                  >
-                    Forgot password?
-                  </a>
-                </div>
-              </div>
-
               <div>
                 <button
                   type="submit"
@@ -124,35 +113,6 @@ const Login = () => {
                 </button>
               </div>
             </form>
-
-            <div className="mt-6 bg-transparent relative">
-              <div className="relative">
-                <div className="absolute inset-0 bg-transparent flex items-center">
-                  <div className="w-full border-t border-gray-300" />
-                </div>
-                <div className="relative flex bg-[#313843] justify-center text-sm">
-                  <span className="bg-[#313843] px-2 text-gray-500">
-                    Or continue with
-                  </span>
-                </div>
-              </div>
-
-              <div className="mt-6 bg-[#262C35] grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  className="inline-flex w-full justify-center items-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
-                >
-                  Google
-                </button>
-
-                <button
-                  type="button"
-                  className="inline-flex w-full justify-center items-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
-                >
-                  Facebook
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </div>
