@@ -12,8 +12,12 @@ function Navbar() {
             <div className='flex justify-between gap-2 bg-[#262C35]'>
                 {location.pathname !== '/otp-verification' && ( // Conditionally render buttons
                     <>
-                        <button onClick={() => navigate('/login')} className='bg-[#FE8D32] text-white p-2 px-5 rounded-full m-3'>Login</button>
-                        <button onClick={() => navigate('/signup')} className='bg-[#367BFE] text-white p-2 px-5 rounded-full m-3'>Signup</button>
+                        {location.pathname !== '/login' && ( // Exclude login button on login page
+                            <button onClick={() => navigate('/login')} className='bg-[#FE8D32] text-white p-2 px-5 rounded-full m-3'>Login</button>
+                        )}
+                        {location.pathname !== '/signup' && ( // Exclude signup button on signup page
+                            <button onClick={() => navigate('/signup')} className='bg-[#367BFE] text-white p-2 px-5 rounded-full m-3'>Signup</button>
+                        )}
                     </>
                 )}
             </div>
