@@ -1,3 +1,5 @@
+require('dotenv').config(); // Import dotenv to load environment variables
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -21,7 +23,7 @@ app.get('/api/test', (req, res) => {
 });
 
 // MongoDB Connection
-mongoose.connect('mongodb://127.0.0.1:27018/newdb', {
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -96,7 +98,7 @@ app.post('/api/login', async (req, res) => {
         }
 
         // Generate JWT token
-        const token = jwt.sign({ id: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' }); // Updated line
 
         res.status(200).json({
             message: 'Login successful',
