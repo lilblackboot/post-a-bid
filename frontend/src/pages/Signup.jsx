@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
+import { useUser } from '../UserContext';
 import Navbar from '../components/Navbar';
 
 const Signup = () => {
+  const { setUserEmail } = useUser(); // Get the setUserEmail function
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formErrors, setFormErrors] = useState({});
@@ -84,12 +86,27 @@ const Signup = () => {
         const data = await response.json();
         console.log('Response:', data);
   
+        // if (response.ok) {
+        //   console.log('Signup successful');
+        //   navigate('/login');
+        // } else {
+        //   setFormErrors({ general: data.message || 'Signup failed' });
+        // }
+
         if (response.ok) {
-          console.log('Signup successful');
-          navigate('/login');
+          // Send OTP after successful signup
+          setUserEmail(formData.email); // Set the email in context
+          await fetch('http://localhost:5000/api/send-otp', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ email: formData.email })
+          });
+          navigate('/otp-verification'); // Redirect to OTP verification page
         } else {
-          setFormErrors({ general: data.message || 'Signup failed' });
-        }
+            setFormErrors({ general: 'Signup failed' });
+        }    
   
       } catch (error) {
         console.error('Signup error:', error);

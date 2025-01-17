@@ -13,13 +13,16 @@ app.use(cors());
 // Other middleware
 app.use(express.json());
 
+// Otp function import
+const { sendOtp, verifyOtp } = require('./otp');
+
 // Test route to verify the server is working
 app.get('/api/test', (req, res) => {
     res.json({ message: 'Server is working' });
 });
 
 // MongoDB Connection
-mongoose.connect('mongodb://127.0.0.1:27017/newdb', {
+mongoose.connect('mongodb://127.0.0.1:27018/newdb', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -73,6 +76,27 @@ app.post('/api/signup', async (req, res) => {
     } catch (error) {
         console.error('Signup error:', error);
         res.status(500).json({ message: 'Error creating user' });
+    }
+});
+
+// otp endpoint
+app.post('/api/send-otp', async (req, res) => {
+    const { email } = req.body;
+    const result = await sendOtp(email);
+    if (result.success) {
+        res.status(200).json({ message: result.message });
+    } else {
+        res.status(500).json({ message: result.message });
+    }
+});
+
+app.post('/api/verify-otp', (req, res) => {
+    const { email, otp } = req.body;
+    const result = verifyOtp(email, otp);
+    if (result.success) {
+        res.status(200).json({ message: result.message });
+    } else {
+        res.status(400).json({ message: result.message });
     }
 });
 
