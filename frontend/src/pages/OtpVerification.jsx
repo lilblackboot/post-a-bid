@@ -19,7 +19,7 @@ const OtpVerification = () => {
         });
 
         if (response.ok) {
-            navigate('/'); // Redirect to home or another page
+            navigate('/Login'); // Redirect to home or another page
         } else {
             alert('Invalid OTP');
         }
