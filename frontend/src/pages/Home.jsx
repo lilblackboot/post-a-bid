@@ -25,7 +25,7 @@ function Home() {
       >
        <Navbar />
       <SearchBar />
-      <div>
+      <div className="container  mx-4" >
         <PostGrid /> 
       </div>
       </div>
