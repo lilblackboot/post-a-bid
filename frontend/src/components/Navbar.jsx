@@ -7,7 +7,7 @@ function Navbar() {
 
   return (
     <div>
-        <nav className='bg-[#262C35] flex justify-between align-middle items-center'>
+        <nav className='bg-[#262C35] flex justify-between w-full align-middle items-center'>
             <h1 className='text-white text-4xl bg-[#262C35] p-4'>POST-A-BID</h1>
             <div className='flex justify-between gap-2 bg-[#262C35]'>
                 {location.pathname !== '/otp-verification' && ( // Conditionally render buttons

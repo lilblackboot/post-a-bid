@@ -17,7 +17,7 @@ const Sidebar = ({ onToggle }) => {
 
   return (
     <div
-      className={`h-screen bg-[#262C35] text-white fixed transition-[width,background-color] duration-500 ease-in-out ${
+      className={`h-full bg-[#262C35] text-white fixed transition-[width,background-color] duration-500 ease-in-out ${
         isCollapsed ? "w-18" : "w-64"
       }`}
     >

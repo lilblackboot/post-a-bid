@@ -18,7 +18,7 @@ const posts = [
 
 const PostGrid = () => {
   return (
-    <div className="columns-1 sm:columns-3 lg:columns-6 gap-4 p-4">
+    <div className="columns-1 sm:columns-3 lg:columns-5 gap-4 p-4">
       {posts.map(post => (
         <div key={post.id} className="mb-4 bg-gray-200 rounded-xl p-5 break-inside-avoid">
           <img
