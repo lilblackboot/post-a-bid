@@ -12,7 +12,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await fetch('http://localhost:5000/api/login', {
         method: 'POST',
@@ -23,13 +22,15 @@ const Login = () => {
       });
 
       const data = await response.json();
-
+      
       if (response.ok) {
-        // Handle successful login (e.g., store user data, navigate to dashboard)
+        // Store the token - now correctly accessing it from data
+        localStorage.setItem('token', data.token);
         console.log('Login successful:', data);
-        navigate('/'); // Redirect to the dashboard or home page
+        // You might also want to store user info
+        localStorage.setItem('user', JSON.stringify(data.user));
+        navigate('/');
       } else {
-        // Handle login error
         setError(data.message || 'Login failed');
       }
     } catch (error) {
