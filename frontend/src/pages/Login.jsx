@@ -24,10 +24,8 @@ const Login = () => {
       const data = await response.json();
       
       if (response.ok) {
-        // Store the token - now correctly accessing it from data
         localStorage.setItem('token', data.token);
         console.log('Login successful:', data);
-        // You might also want to store user info
         localStorage.setItem('user', JSON.stringify(data.user));
         navigate('/');
       } else {
