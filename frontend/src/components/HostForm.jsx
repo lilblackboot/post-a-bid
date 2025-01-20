@@ -3,7 +3,7 @@ import React from 'react'
 function HostForm() {
   return (
     <>
-    hi
+    <h1>Host Form</h1>
     </>
   )
 }
