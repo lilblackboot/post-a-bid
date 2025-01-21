@@ -32,6 +32,12 @@ function Navbar() {
       <nav className='bg-[#262C35] flex justify-between w-full align-middle items-center'>
         <h1 className='text-white text-4xl bg-[#262C35] p-4'>POST-A-BID</h1>
         <div className='flex justify-between gap-2 bg-[#262C35]'>
+        <button 
+                      onClick={() => navigate('/HostForm')} 
+                      className='bg-[#367BFE] text-white p-2 px-5 rounded-full m-3'
+                    >
+                      Host
+                    </button>
           {!isAuthenticated ? (
             <>
               {location.pathname !== '/otp-verification' && (
